@@ -1,0 +1,12 @@
+[package]
+name = "courant-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = { version = "0.4.38", features = ["serde"] }
+comfy-table = { version = "7.1.1", features = ["ansi-str"] }
+reqwest = { version = "0.12.7", features = ["json"] }
+serde = { version = "1.0.210", features = ["derive"] }
+term_size = "0.3.2"
+tokio = { version = "1.40.0", features = ["full"] }
