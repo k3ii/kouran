@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, FixedOffset, Utc};
 use comfy_table::modifiers::UTF8_ROUND_CORNERS;
 use comfy_table::presets::UTF8_FULL;
 use comfy_table::ContentArrangement;
@@ -26,6 +26,7 @@ struct OutageEvent {
 
 fn print_outage_events(events: &[OutageEvent], title: &str) {
     let mut table = Table::new();
+    let utc_plus_4 = FixedOffset::east_opt(4 * 3600).expect("Unable to create UTC+4 offset");
     table
         .load_preset(UTF8_FULL)
         .apply_modifier(UTF8_ROUND_CORNERS)
@@ -46,8 +47,22 @@ fn print_outage_events(events: &[OutageEvent], title: &str) {
             Cell::new(&event.locality),
             Cell::new(&event.streets),
             Cell::new(&event.district),
-            Cell::new(event.from_time.format("%H:%M").to_string()).fg(Color::Cyan),
-            Cell::new(event.to_time.format("%H:%M").to_string()).fg(Color::Cyan),
+            Cell::new(
+                event
+                    .from_time
+                    .with_timezone(&utc_plus_4)
+                    .format("%H:%M")
+                    .to_string(),
+            )
+            .fg(Color::Cyan),
+            Cell::new(
+                event
+                    .to_time
+                    .with_timezone(&utc_plus_4)
+                    .format("%H:%M")
+                    .to_string(),
+            )
+            .fg(Color::Cyan),
         ]);
     }
 
