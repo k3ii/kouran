@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 chrono = { version = "0.4.38", features = ["serde"] }
+clap = "4.5.17"
 comfy-table = { version = "7.1.1", features = ["ansi-str"] }
 reqwest = { version = "0.12.7", features = ["json"] }
 serde = { version = "1.0.210", features = ["derive"] }
