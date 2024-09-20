@@ -1,7 +1,8 @@
 # kouran
 
 `kouran` se enn sinp zouti CLI ki donn bann linformasion lor koupir kouran dan Moris. 
-Bann done-la sorti depi enn [dataset](https://github.com/MrSunshyne/mauritius-power-outages) ki finn kree par [Sandeep Ramgolam](https://github.com/MrSunshyne).
+
+Bann done-la sorti depi enn [dataset](https://github.com/MrSunshyne/mauritius-dataset-electricity) ki finn kree par [Sandeep Ramgolam](https://github.com/MrSunshyne).
 
 ![demo](./assets/demo.jpeg)
 
