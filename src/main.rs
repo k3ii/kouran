@@ -25,46 +25,52 @@ struct OutageEvent {
     id: String,
 }
 
-fn print_outage_events(events: &[OutageEvent], title: &str) {
+fn print_outage_events(events: &[OutageEvent], title: &str, is_today: bool) {
     let mut table = Table::new();
     let utc_plus_4 = FixedOffset::east_opt(4 * 3600).expect("Unable to create UTC+4 offset");
+    let now = Utc::now().with_timezone(&utc_plus_4);
+
     table
         .load_preset(UTF8_FULL)
         .apply_modifier(UTF8_ROUND_CORNERS)
-        .set_content_arrangement(ContentArrangement::Dynamic)
-        //        .set_width(100)
-        .set_header(vec![
-            Cell::new("Date").fg(Color::Green),
-            Cell::new("Locality").fg(Color::Green),
-            Cell::new("Streets").fg(Color::Green),
-            Cell::new("District").fg(Color::Green),
-            Cell::new("From").fg(Color::Green),
-            Cell::new("To").fg(Color::Green),
-        ]);
+        .set_content_arrangement(ContentArrangement::Dynamic);
+
+    let mut headers = vec![];
+    if is_today {
+        headers.push(Cell::new("Status").fg(Color::Green));
+    } else {
+        headers.push(Cell::new("Date").fg(Color::Green));
+    }
+    headers.extend(vec![
+        Cell::new("Location").fg(Color::Green),
+        Cell::new("Streets").fg(Color::Green),
+        Cell::new("Time").fg(Color::Green),
+    ]);
+    table.set_header(headers);
 
     for event in events {
-        table.add_row(vec![
-            Cell::new(&event.date).fg(Color::Yellow),
-            Cell::new(&event.locality),
+        let mut row = vec![];
+
+        if is_today {
+            let is_ongoing = event.from_time <= now && now <= event.to_time;
+            let status = if is_ongoing { "🔴" } else { "🟢" };
+            row.push(Cell::new(status));
+        } else {
+            row.push(Cell::new(&event.date).fg(Color::Yellow));
+        }
+
+        row.extend(vec![
+            Cell::new(format!("{} ({})", &event.locality, &event.district)),
             Cell::new(&event.streets),
-            Cell::new(&event.district),
-            Cell::new(
-                event
-                    .from_time
-                    .with_timezone(&utc_plus_4)
-                    .format("%H:%M")
-                    .to_string(),
-            )
-            .fg(Color::Cyan),
-            Cell::new(
-                event
-                    .to_time
-                    .with_timezone(&utc_plus_4)
-                    .format("%H:%M")
-                    .to_string(),
-            )
+            Cell::new(format!(
+                "{} - {}",
+                event.from_time.with_timezone(&utc_plus_4).format("%H:%M"),
+                event.to_time.with_timezone(&utc_plus_4).format("%H:%M")
+            ))
             .fg(Color::Cyan),
         ]);
+
+        table.add_row(row);
     }
 
     println!("{}", title);
