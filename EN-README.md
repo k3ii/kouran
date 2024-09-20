@@ -1,6 +1,7 @@
 # Kouran
 `kouran` is a simple CLI tool that provides information on power outages in Mauritius. 
-The data is sourced from a [dataset](https://github.com/MrSunshyne/mauritius-power-outages) created by [Sandeep Ramgolam](https://github.com/MrSunshyne).
+
+The data is sourced from a [dataset](https://github.com/MrSunshyne/mauritius-dataset-electricity) created by [Sandeep Ramgolam](https://github.com/MrSunshyne).
 
 ![demo](./assets/demo.jpeg)
 
