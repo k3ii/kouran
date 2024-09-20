@@ -1,3 +1,4 @@
+mod cli;
 use chrono::{DateTime, FixedOffset, Utc};
 use comfy_table::modifiers::UTF8_ROUND_CORNERS;
 use comfy_table::presets::UTF8_FULL;
@@ -79,8 +80,25 @@ async fn main() -> Result<(), reqwest::Error> {
         .json()
         .await?;
 
-    print_outage_events(&outage.today, "Today's Outages");
-    print_outage_events(&outage.future, "Future Outages");
+    let matches = cli::cli().get_matches();
+
+    match matches.subcommand() {
+        Some(("today", _)) => {
+            print_outage_events(&outage.today, "Today's Outages", true);
+        }
+        Some(("tomorrow", _)) => {
+            print_outage_events(&outage.future, "Future Outages", false);
+        }
+        Some(("all", _)) => {
+            print_outage_events(&outage.today, "Today's Outages", true);
+            println!("\n"); // Add a blank line between tables
+            print_outage_events(&outage.future, "Future Outages", false);
+        }
+        _ => {
+            println!("Please use 'today', 'tomorrow', or 'all' subcommand.");
+            std::process::exit(1);
+        }
+    }
 
     Ok(())
 }
