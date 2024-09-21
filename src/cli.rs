@@ -2,7 +2,7 @@ use clap::Command;
 
 pub fn cli() -> Command {
     Command::new("courant")
-        .version("0.1.0")
+        .version("0.1.1")
         .author("Jain Ramchurn")
         .subcommand(
             Command::new("today")
