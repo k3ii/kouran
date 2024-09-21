@@ -3,7 +3,7 @@
 
 The data is sourced from a [dataset](https://github.com/MrSunshyne/mauritius-dataset-electricity) created by [Sandeep Ramgolam](https://github.com/MrSunshyne).
 
-![demo](./assets/demo.jpeg)
+![demo](./assets/demo.png)
 
 ## Features
 

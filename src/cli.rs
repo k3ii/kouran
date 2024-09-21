@@ -2,7 +2,7 @@ use clap::Command;
 
 pub fn cli() -> Command {
     Command::new("courant")
-        .version("0.1.0")
+        .version("0.1.1")
         .author("Jain Ramchurn")
         .subcommand(
             Command::new("today")
@@ -12,7 +12,7 @@ pub fn cli() -> Command {
         .subcommand(
             Command::new("tomorrow")
                 .about("Show tomorrow's power outages")
-                .aliases(["demain", "dmain", "future"]),
+                .aliases(["demain", "dmain", "demin", "future"]),
         )
         .subcommand(
             Command::new("all")
