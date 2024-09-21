@@ -4,7 +4,7 @@
 
 Bann done-la sorti depi enn [dataset](https://github.com/MrSunshyne/mauritius-dataset-electricity) ki finn kree par [Sandeep Ramgolam](https://github.com/MrSunshyne).
 
-![demo](./assets/demo.jpeg)
+![demo](./assets/demo.png)
 
 ## Fonksionalite
 
