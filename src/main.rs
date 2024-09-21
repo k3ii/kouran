@@ -102,7 +102,9 @@ async fn main() -> Result<(), reqwest::Error> {
         }
         Some(("all", _)) => {
             print_outage_events(&outage.today, "Today's Outages", true);
-            println!("\n"); // Add a blank line between tables
+            if !outage.today.is_empty() {
+                println!("\n");
+            }
             print_outage_events(&outage.future, "Future Outages", false);
         }
         _ => {
