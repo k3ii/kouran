@@ -12,7 +12,7 @@ pub fn cli() -> Command {
         .subcommand(
             Command::new("tomorrow")
                 .about("Show tomorrow's power outages")
-                .aliases(["demain", "dmain", "future"]),
+                .aliases(["demain", "dmain", "demin", "future"]),
         )
         .subcommand(
             Command::new("all")
