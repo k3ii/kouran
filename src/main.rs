@@ -26,6 +26,11 @@ struct OutageEvent {
 }
 
 fn print_outage_events(events: &[OutageEvent], title: &str, is_today: bool) {
+    if events.is_empty() && is_today {
+        println!("There are no planned outages scheduled for today. 🎉");
+        return;
+    }
+
     let mut table = Table::new();
     let utc_plus_4 = FixedOffset::east_opt(4 * 3600).expect("Unable to create UTC+4 offset");
     let now = Utc::now().with_timezone(&utc_plus_4);
