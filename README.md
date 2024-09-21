@@ -29,7 +29,7 @@ cargo install kouran
 Pou bann itilizater macOS, ou kapav instal `kouran` avek Homebrew:
 
 ```bash
-brew instal k3ii/tap/kouran
+brew install k3ii/tap/kouran
 ```
 Chek paz version pou instal bann biner ki finn konstrir alavans.
 
