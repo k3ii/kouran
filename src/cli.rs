@@ -2,12 +2,12 @@ use clap::Command;
 
 pub fn cli() -> Command {
     Command::new("courant")
-        .version("0.1.2")
+        .version("0.1.3")
         .author("Jain Ramchurn")
         .subcommand(
             Command::new("today")
                 .about("Show today's power outages")
-                .aliases(["zordi"]),
+                .aliases(["zordi", "zrdi"]),
         )
         .subcommand(
             Command::new("tomorrow")
@@ -17,6 +17,6 @@ pub fn cli() -> Command {
         .subcommand(
             Command::new("all")
                 .about("Show both today's and tomorrow's power outages")
-                .aliases(["tou", "tout"]),
+                .aliases(["tou", "tout", "tous"]),
         )
 }
